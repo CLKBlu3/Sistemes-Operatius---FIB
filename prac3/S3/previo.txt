@@ -1,0 +1,66 @@
+1.
+Soy el proceso 3313
+Soy el proceso 3314
+El proceso 3313 es el proceso padre y el 3314 el proceso hijo, ya que es creado posteriormente a partir del padre.
+
+2.
+Antes del fork: Soy el proceso 3389
+PADRE: Soy el proceso 3389
+Los DOS: Soy el proceso 3389
+HIJO: Soy el proceso 3390
+Los DOS: Soy el proceso 3390
+Los mensajes con "soy el proceso 3389" son ejecutados por el padre, en cambio los mensajes con "soy el proceso 3390" son ejecutados por el hijo.
+El primer mensaje es obviamente el padre ya que el hijo aun no ha sido creado. Ambos ejecutan simultaneamente el switch(pid) del código generando dos mensajes escritos por "Los Dos" con procesos distintos puesto que el padre ejecuta el procesp (3389) y el hijo lo hace con el proceso (3390), por tanto ambos muestran el mensaje "Los Dos: Soy el proceso 33XX" (una vez cada uno).
+
+3.
+Antes del fork: Soy el proceso 3408
+PADRE: Soy el proceso 3408
+Solo lo ejecuta el padre: Soy el proceso 3408
+HIJO: Soy el proceso 3409
+El padre es el que muestra el primer mensaje (proceso 3408) puesto que el hijo aun no ha sido creado. El segundo mensaje también es parte del padre, como al final del case(0) hay el codigo "exit(0)", el hijo deja de ejecutar el código en ese punto
+y muestra solo el mensaje de la cuarta linia. El tercer mensaje es solo ejecutado por el padre porque el hijo termina su ejecución antes de poder llegar a ese punto del código.
+
+4.
+Antes del fork: Soy el proceso 3475
+PADRE: Soy el proceso 3475
+Solo lo ejecuta el padre: Soy el proceso 3475
+HIJO: Soy el proceso 3476
+HIJO acaba: Soy el proceso 3476
+El padre muestra el primer mensaje puesto que aun no se ha creado el hijo. Padre e hijo ejecutan sus respectivos casos dentro del switch(pid) y:
+el padre muestra los mensajes dos y tres, y el hijo el cuarto y el quinto. El mensaje 4 y el 5 se encuentran dentro del caso del hijo, pero como encontramos la linia de codigo "exit(0)", termina su ejecución sin mostrar el mensaje final que solo muestra
+el padre (3r mensaje en consola). El segundo mensaje es del padre y se ejecuta en el entorno de su caso dentro del switch(pid).
+
+5.
+Antes del fork: Soy el proceso 3486
+PADRE: Soy el proceso 3486
+HIJO: Soy el proceso 3487
+HIJO:La variable_global vale A y la local a
+PADRE:La variable_global vale A y la local a
+Solo lo ejecuta el padre: Soy el proceso 3486
+El padre muestra el primer mensaje puesto que aun no se ha creado el hijo. El código ejecuta switch(pid):
+El padre muestra el mensaje correspondiente a su caso (2º mensaje) y espera a que termine la ejecución del proceso hijo para mostrar el 5º mensaje que se muestra en consola, ya que el código incluye la linia waitpid(), que le fuerza a ello. El último mensaje es ejecutado solo por el padre puesto que en el codigo del caso del hijo encontramos un "exit".
+El hijo muestra los mensajes 3 y 4 dentro de su caso en el switch.
+
+6.
+En este caso se muestran demasiados mensajes por consola como para pegarlos en este documento.
+El padre muestra el primer mensaje puesto que aun no se ha creado el hijo, dentro el switch ambos ejecutan su caso.
+El hijo muestra un mensaje con su proceso y luego muestra 100.000 mensajes con el valor correspondiente de la variable global en cada iteración.
+El padre hace el mismo proceso simultaneamente. Al final, el padre muestra otro mensaje con su proceso. Este mensaje no es ejecutado por el hijo por la linia de código con "exit(0)" que encontramos al final de su caso.
+(La variable_global toma un valor final de "k").
+
+7.
+El ejemplo_fork7 no compila ya que en el momento de declarar la variable_local, no existe ningún hijo, haciendo que esta variable_local no exista en el ámbito del "hijo", generando el error de compilación por intentar acceder a una variable que "no existe".
+Para evitar este error la variable_local debe declararse posteriormente a la creación del hijo, y fuera del ámbito del label de switch(pid), por tanto, la he declarado dentro de la función "Escribe_variable".
+
+8.
+El programa ha ejecutado su codigo inicial diciendo su proceso y posteriormente ha ejecutado la funcion "ls" de la consola con la opción "-l". El mensaje con el numero del proceso solo se visualiza una vez en mi consola.
+
+9.
+La consola muestra 3 mensajes:
+    Soy el proceso: 3954
+    Soy el proceso 3954
+    Soy el proceso 3955
+El primer missatge correspon al proces del ejemplo_exec2, el segon es el proces de ejemplo_fork1, mentres que el tercer correspon al fill del ejemplo_fork1. S'executen 3 procesos.
+
+10.
+He consultat la pagina 2 de getpid, la pagina 3am del fork, les pagines n i 3 de exit, pagina 2 de waitpid, les pagines 3 i 3p de execlp, pagines 3 i 3p de perror, pagina 1 de ps i pagina n de proc.

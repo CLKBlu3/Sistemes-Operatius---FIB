@@ -1,0 +1,19 @@
+ Sobre alarm1:
+    1. Salta un mensaje que dice "Alarm clock".
+    2. El programa termina con un mensaje que dice "Killed"
+    3. El proceso que muestra en pantalla el mensaje es el proceso de kill. Para finalizar el proceso se usa la llama a sistema exit().
+    4. No se llega a ejecutar nunca.
+
+Sobre alarm2:
+    1. No, usando la opcion "-ALRM" forzamos la detención de la alarma, por asi decirlo, matando el temporizador.
+    2. Podemos modificar el tratamiento a todos los signal que se muestran al ejecutar "kill -l"
+    3. Modificar funcion_alarma(), la primera linia: "segundos = segundos + 10" cambiarla por "segundos = segundos + 10 - alarm(10)"
+
+Sobre alarm3:
+    1. Ambos. El  hijo hereda la tabla de acciones asociadas a los signals del proceso padre.
+
+Sobre alarm4:
+    1. cada proceso programa un sigalarm, que reciben ambos.
+
+Sobre ejemplo_waitpid:
+    Adjunto codi en C dins el Tar.

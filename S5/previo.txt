@@ -1,0 +1,56 @@
+                 U atoi@@GLIBC_2.2.5
+0000000000601060 B __bss_start
+0000000000601060 b completed.6337
+0000000000601050 D __data_start
+0000000000601050 W data_start
+00000000004005d0 t deregister_tm_clones
+0000000000400640 t __do_global_dtors_aux
+0000000000600e08 t __do_global_dtors_aux_fini_array_entry
+0000000000601058 D __dso_handle
+0000000000600e18 d _DYNAMIC
+0000000000601060 D _edata
+0000000000601068 B _end
+                 U exit@@GLIBC_2.2.5
+0000000000400824 T _fini
+0000000000400660 t frame_dummy
+0000000000600e00 t __frame_dummy_init_array_entry
+00000000004009b0 r __FRAME_END__
+0000000000601000 d _GLOBAL_OFFSET_TABLE_
+                 w __gmon_start__
+00000000004004f8 T _init
+0000000000600e08 t __init_array_end
+0000000000600e00 t __init_array_start
+0000000000400830 R _IO_stdin_used
+                 w _ITM_deregisterTMCloneTable
+                 w _ITM_registerTMCloneTable
+0000000000601064 B j
+0000000000600e10 d __JCR_END__
+0000000000600e10 d __JCR_LIST__
+                 w _Jv_RegisterClasses
+0000000000400820 T __libc_csu_fini
+00000000004007b0 T __libc_csu_init
+                 U __libc_start_main@@GLIBC_2.2.5
+00000000004006ab T main
+0000000000400600 t register_tm_clones
+                 U sprintf@@GLIBC_2.2.5
+00000000004005a0 T _start
+                 U strlen@@GLIBC_2.2.5
+000000000040068d T suma
+0000000000601060 D __TMC_END__
+                 U write@@GLIBC_2.2.5
+
+¿Es posible saber la dirección de las variables “i” y “j” con el comando nm? ¿Por qué? ¿En  qué  zona  de  memoria  están  reservadas  estas variables?  Busca  también  la dirección asignada a la función “suma”.
+Sí. Estan reservades a 0000000000601064. La función suma la encontramos asignada a 000000000040068d.
+
+Para compilar el fichero junto a librerias estaticas he usado la opcion -static -static-libgcc de GCC: gcc -static -static-libgcc mem1_previo_v2 mem1_previo_v2.c
+
+Con tamaño vector 10:
+mem2_previo: 00602000-0062a000  00028000
+mem2_previo_v2: 0062e000-0062f000 00001000
+
+Con tamaño vector 40000:
+mem2_previo: 00602000-0062a000  00028000
+mem2_previo_v2: 02529000-02551000   00028000
+
+En mem2_previo el heap se mantiene igual ya que el vector se llena de manera estatica. Pero, mem2_previo_v2 se almacena de manera dinamica y observamos que el valor crece segun el numero de elementos del vector.
+
