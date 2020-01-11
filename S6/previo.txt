@@ -1,0 +1,43 @@
+1. En /proc/[pid]/stat se encuentran los minor y major page fault.
+	En cminflt y cmajflt.
+
+2. vmstat -n 1
+	Swap-in correspon a la columna si 
+	swap-out correspon a la columna so
+
+3. 	time ./fib 10 retorna
+            El fibonacci de 10 es 55
+                0.00user 0.00system 0:00.00elapsed 0%CPU (0avgtext+0avgdata 1312maxresident)k
+                0inputs+0outputs (0major+64minor)pagefaults 0swaps
+                
+                Ens quedem amb el temps: 0:00.00elapsed
+
+	time ./fib 20 retorna 
+                El fibonacci de 20 es 6765
+                0.00user 0.00system 0:00.00elapsed 0%CPU (0avgtext+0avgdata 1216maxresident)k
+                0inputs+0outputs (0major+61minor)pagefaults 0swaps
+
+                Ens quedem amb el temps: 0:00.00elapsed
+                
+	time ./fib 30 retorna 
+                El fibonacci de 30 es 832040
+                0.01user 0.00system 0:00.01elapsed 100%CPU (0avgtext+0avgdata 1312maxresident)k
+                0inputs+0outputs (0major+64minor)pagefaults 0swaps
+                
+                Ens quedem amb el temps: 0:00.01elapsed
+
+	time ./fib 40 retorna
+                El fibonacci de 40 es 102334155
+                1.46user 0.00system 0:01.46elapsed 100%CPU (0avgtext+0avgdata 1216maxresident)k
+                0inputs+0outputs (0major+62minor)pagefaults 0swaps
+                
+                Ens quedem amb el temps: 0:01.46elapsed
+	
+	time ./fib 50 retorna 
+                El fibonacci de 50 es 12586269025
+                177.64user 0.00system 2:57.39elapsed 100%CPU (0avgtext+0avgdata 1312maxresident)k
+                0inputs+0outputs (0major+63minor)pagefaults 0swaps
+                
+4. 10 (en la shell de OpenSuse que tinc instalada a casa)
+
+

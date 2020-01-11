@@ -1,0 +1,154 @@
+¿Cómo podéis saber los sistemas de ficheros montados en vuestro sistema y de qué tipo son? Indica, además, en qué directorios están montados.
+    Usando el comando df.
+    S.ficheros     bloques de 1K  Usados Disponibles Uso% Montado en
+    devtmpfs             4019004       0     4019004   0% /dev
+    tmpfs                4059944     320     4059624   1% /dev/shm
+    tmpfs                4059944    2416     4057528   1% /run
+    tmpfs                4059944       0     4059944   0% /sys/fs/cgroup
+    /dev/sdc6           41945088 7393484    33450388  19% /
+    /dev/sdc6           41945088 7393484    33450388  19% /.snapshots
+    /dev/sdc6           41945088 7393484    33450388  19% /var/tmp
+    /dev/sdc6           41945088 7393484    33450388  19% /var/lib/mariadb
+    /dev/sdc6           41945088 7393484    33450388  19% /tmp
+    /dev/sdc6           41945088 7393484    33450388  19% /var/lib/named
+    /dev/sdc6           41945088 7393484    33450388  19% /var/lib/pgsql
+    /dev/sdc6           41945088 7393484    33450388  19% /var/lib/libvirt/images
+    /dev/sdc6           41945088 7393484    33450388  19% /var/lib/mysql
+    /dev/sdc6           41945088 7393484    33450388  19% /var/lib/mailman
+    /dev/sdc6           41945088 7393484    33450388  19% /usr/local
+    /dev/sdc6           41945088 7393484    33450388  19% /srv
+    /dev/sdc6           41945088 7393484    33450388  19% /boot/grub2/i386-pc
+    /dev/sdc6           41945088 7393484    33450388  19% /var/spool
+    /dev/sdc6           41945088 7393484    33450388  19% /var/opt
+    /dev/sdc6           41945088 7393484    33450388  19% /var/crash
+    /dev/sdc6           41945088 7393484    33450388  19% /opt
+    /dev/sdc6           41945088 7393484    33450388  19% /var/log
+    /dev/sdc6           41945088 7393484    33450388  19% /boot/grub2/x86_64-efi
+    /dev/sdc7          606655064  362776   606292288   1% /home
+    /dev/sdb             7818240 1433500     6384740  19% /run/media/lluis/08D6-4BB4
+
+
+¿Cómo se puede saber el número de inodos libres de un sistema de ficheros? ¿Qué comando has utilizado y con qué opciones?
+    Usando la opcion -i del comando df ("df -i")
+
+
+¿Cómo  se  puede  saber  el  espacio  libre  de  un  sistema  de  ficheros?  ¿Qué comando has utilizado y con qué opciones?
+    Usando la opcion -h del comando df ("df -h"), de esta manera nos muestra el espacio expresado en forma de "GBs, MBs, etc".
+    
+    
+    
+De  qué  tipo es cada uno de  links  creados, sl_pr y hl_pr?  Ejecuta el comando stat  sobre pr.txt,  sobre  sl_pr  y  sobre  hl_pr.  Busca  en  la  salida  de  stat  la información sobre el inodo, el tipo de fichero y el número de links y anótala en el fichero previo.txt. ¿Cuál es el número de links que tiene cada fichero? ¿Qué significa ese valor? ¿Qué inodo tiene cada fichero? ¿Alguno de los links, sl_pr o hl_pr, tiene el mismo inodo que pr.txt? ¿Si es así, qué significa eso? 
+    sl_pr es un soft link. hl_pr es un hard link.
+    
+    stat pr.txt:
+    
+        Fichero: «pr.txt»
+        Tamaño: 19            Bloques: 8          Bloque E/S: 4096   fichero regular
+        Dispositivo: 827h/2087d Nodo-i: 375148      Enlaces: 2
+        Acceso: (0644/-rw-r--r--)  Uid: ( 1000/   lluis)   Gid: (  100/   users)
+            Acceso: 2016-12-08 23:07:56.803318190 +0100
+        Modificación: 2016-12-08 23:07:43.947800522 +0100
+            Cambio: 2016-12-08 23:08:00.935162688 +0100
+            Creación: -
+    
+        Es un fichero regular, con inodo 375148 con 2 links
+    
+    stat pr.txt sl_pr:
+          Fichero: «sl_pr» -> «pr.txt»
+        Tamaño: 6             Bloques: 0          Bloque E/S: 4096   enlace simbólico
+        Dispositivo: 827h/2087d Nodo-i: 375176      Enlaces: 1
+        Acceso: (0777/lrwxrwxrwx)  Uid: ( 1000/   lluis)   Gid: (  100/   users)
+            Acceso: 2016-12-08 23:07:56.027347369 +0100
+        Modificación: 2016-12-08 23:07:56.015347820 +0100
+            Cambio: 2016-12-08 23:07:56.015347820 +0100
+            Creación: -
+        
+        Se trata de un enlace simbólico con 1 link e inodo 375176.
+        
+    stat pr.txt hl_pr:
+          Fichero: «hl_pr»
+        Tamaño: 19            Bloques: 8          Bloque E/S: 4096   fichero regular
+        Dispositivo: 827h/2087d Nodo-i: 375148      Enlaces: 2
+        Acceso: (0644/-rw-r--r--)  Uid: ( 1000/   lluis)   Gid: (  100/   users)
+            Acceso: 2016-12-08 23:07:56.803318190 +0100
+        Modificación: 2016-12-08 23:07:43.947800522 +0100
+            Cambio: 2016-12-08 23:08:00.935162688 +0100
+            Creación: -
+            
+        Se trata de un fichero regular con 2 links e inodo 375148.
+
+        el hl_pr tiene el mismo inodo que pr.txt ya que se apunta directamente al fichero pr.txt, mientras que sl_pr apunta al nombre del fichero.
+
+
+Ejecuta los comandos cat, namei y readlink sobre sl_pr y sobre hl_pr: 
+    Apunta el resultado en el fichero previo.txt. 
+        cat sl_pr
+            esto es una prueba
+        cat hl_pr
+            esto es una prueba
+        namei sl_pr
+                f: sl_pr
+                    l sl_pr -> pr.txt
+                    - pr.txt
+        namei hl_pr
+                f: hl_pr
+                    - hl_pr
+        readlink sl_pr
+            pr.txt        
+        readlink hl_pr
+            no sale nada.
+    ¿Observas alguna diferencia en el resultado de alguno de los comandos cuando se ejecutan sobre sl_pr y cuando se ejecutan sobre hl_pr? Si hay alguna diferencia, explica el motivo.
+        Si. En el namei y el readlink.
+            en el namei se diferencian porque sl_pr al ser un soft link, debe ir a buscar el fichero pr.txt, mientras que hl_pr al ser un hard_link ya contiene la información de pr.txt
+            En el readlink: sl_pr contiene un link al fichero pr.txt mientras que hl_pr es una copia de la información de pr.txt
+
+Elimina ahora el fichero pr.txt y vuelve a ejecutar los comandos stat, cat, namei y readlink tanto sobre sl_pr como hl_pr. 
+
+    Apunta los resultados en el fichero previo.txt 
+        SO/S9> stat sl_pr
+        Fichero: «sl_pr» -> «pr.txt»
+        Tamaño: 6             Bloques: 0          Bloque E/S: 4096   enlace simbólico
+        Dispositivo: 827h/2087d Nodo-i: 375176      Enlaces: 1
+        Acceso: (0777/lrwxrwxrwx)  Uid: ( 1000/   lluis)   Gid: (  100/   users)
+            Acceso: 2016-12-08 23:07:56.027347369 +0100
+        Modificación: 2016-12-08 23:07:56.015347820 +0100
+            Cambio: 2016-12-08 23:07:56.015347820 +0100
+            Creación: -
+        SO/S9> stat hl_pr
+        Fichero: «hl_pr»
+        Tamaño: 19            Bloques: 8          Bloque E/S: 4096   fichero regular
+        Dispositivo: 827h/2087d Nodo-i: 375148      Enlaces: 1
+        Acceso: (0644/-rw-r--r--)  Uid: ( 1000/   lluis)   Gid: (  100/   users)
+            Acceso: 2016-12-08 23:18:58.189132406 +0100
+        Modificación: 2016-12-08 23:07:43.947800522 +0100
+            Cambio: 2016-12-08 23:18:57.497160375 +0100
+            Creación: -
+        SO/S9> cat sl_pr
+        cat: sl_pr: No existe el fichero o el directorio
+        SO/S9> cat hl_pr
+        esto es una prueba
+        SO/S9> namei sl_pr
+        f: sl_pr
+        l sl_pr -> pr.txt
+            pr.txt - No existe el fichero o el directorio
+        SO/S9> namei hl_pr
+        f: hl_pr
+        - hl_pr
+        SO/S9> readlink sl_pr
+        pr.txt
+        SO/S9> readlink hl_pr
+
+    ¿Observas alguna diferencia en el resultado de alguno de los comandos cuando se ejecutan sobre sl_pr y cuando se ejecutan sobre hl_pr? Si hay alguna diferencia, explica el motivo. ¿Observas alguna diferencia respecto a la ejecución de estos comandos antes  y  después  de  borrar  el  fichero  pr.txt?  Si  hay  alguna  diferencia, explica el motivo.
+        Para sl_pr, el fichero pr.txt ha desaparecido y no puede encontrarlo. Para hl_pr no hay cambios ya que este contiene una copia de la información de pr.txt 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

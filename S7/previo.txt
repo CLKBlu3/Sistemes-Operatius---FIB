@@ -1,0 +1,51 @@
+¿Qué valor devuelve la llamada read después de pulsar el ^D?
+    Devuelve un 0, no lee ningun byte.
+
+Apunta  el  comando utilizado en el fichero “previo.txt”.
+    Uso "./es1 < previo.txt"
+
+Por  ejemplo,  en  el  directorio  donde  has  descomprimido  el  fichero  de  la  sesión,  ejecuta  el pipeline:Página 56 de 73
+#ls –l |grep es 
+¿Cuál es el resultado? ¿Qué operación realiza el comando ‘grep es’?
+    -rwxr-xr-x 1 lluis users 12496 nov 17 19:39 es1
+    -rw-r--r-- 1 lluis users  1062 abr 19  2013 es1.c
+    -rwxr-xr-x 1 lluis users 12744 nov 17 19:39 es2
+    -rw-r--r-- 1 lluis users  1418 abr 19  2013 es2.c
+    -rwxr-xr-x 1 lluis users 12544 nov 17 19:39 es3
+    -rw-r--r-- 1 lluis users   880 nov 13  2013 es3.c
+    -rwxr-xr-x 1 lluis users 12440 nov 17 19:39 es4
+    -rw-r--r-- 1 lluis users  1089 abr 19  2013 es4.c
+    -rwxr-xr-x 1 lluis users 12336 nov 17 19:39 es5
+    -rw-r--r-- 1 lluis users    22 ene 27  2012 es5.c
+    -rwxr-xr-x 1 lluis users 12440 nov 17 19:39 es6
+    -rw-r--r-- 1 lluis users    99 ene 27  2012 es6.c
+    -rwxr-xr-x 1 lluis users 12392 nov 17 19:39 es7
+    -rw-r--r-- 1 lluis users    93 ene 30  2012 es7.c
+    -rwxr-xr-x 1 lluis users 12504 nov 17 19:39 es8
+    -rw-r--r-- 1 lluis users   552 ene 30  2012 es8.c
+
+Una lectura de la salida del proceso "ls -l" e imprime las linias con el patron especificado.
+
+
+Ejecuta un pipeline que muestre en la salida estándar el PID, el usuario y el nombre de todos  los  procesos  bash  que  se  están  ejecutando  en  el  sistema.  Para  ello  utiliza  los comandos  ps  y  grep combinados  con  una  pipe.  Anota  el  comando  en  el  fichero “previo.txt”.
+    ps | grep pts
+    2160 pts/0    00:00:00 tcsh
+    2751 pts/0    00:00:09 kate
+    2904 pts/0    00:00:00 ps
+    2905 pts/0    00:00:00 grep
+
+El fichero es8.c contiene un programa que escribe dos veces un número por salida estándar: una usando la representación interna de la máquina y otra  convirtiendo  antes  el  número  a  string.  Compílalo  y  ejecútalo. ¿Cuántos  bytes  se escriben en cada caso? ¿Qué diferencias observas en lo que aparece en pantalla?
+    4 bytes en representación interna y 5 en representación como string.
+    
+Analiza el fichero fuente de los dos device drivers y contesta a las siguientes preguntas:
+a)¿Qué  función  sirve  para  implementar  el  read  específico  del  dispositivo gestionado por cada device driver?
+    read_driver_1 y read_driver_2
+    
+b) ¿Qué  son  el  major  y  el  minor?  ¿Para  qué  sirven?  ¿Qué  major  y  minor utilizan los dos device drivers?
+    Son los identificadores del deviceDriver. Asocian la logica del dispositivo y su codigo de acceso especifico.
+        MAJOR:
+            driverDevice1: 249
+            driverDevice2: 250
+        MINOR:
+            driverDevice1: 0
+            driverDevice2: 0
